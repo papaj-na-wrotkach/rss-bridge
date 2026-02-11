@@ -214,6 +214,12 @@ abstract class BridgeAbstract
                             $value = reset($value);
                         }
                         break;
+                    case 'multi-list':
+                        if (isset($properties['defaultValue'])) {
+                            // Casting to array makes scalar values, like 'my value', become arrays, like ['my value'].
+                            $value = (array)($properties['defaultValue'] ?? []);
+                        }
+                        break;
                     default:
                         $value ??= ($parameter['defaultValue'] ?? null);
                         break;
